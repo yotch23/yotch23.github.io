@@ -3,193 +3,526 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Day - Приглашение</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Алексей & Алиса — Приглашение на свадьбу</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Новые цвета: темно-бордовый, шампань */
+            --primary-color: #530c0a; /* Темно-бордовый (акцент) */
+            --text-color: #333;
+            --bg-color: #F7EEDD; /* Шампань (основной фон) */
+            --light-bg: #FAF9F6; /* Светлый кремовый/шампань (фоны секций) */
+            --font-main: 'Montserrat', sans-serif;
+            --font-title: 'Cormorant Garamond', serif;
+    
+            /* Цвета для нового календаря */
+            --calendar-bg: #530c0a; /* Темно-бордовый фон календаря */
+            --calendar-text: #e8dcc5; /* Светло-бежевый текст календаря */
+            --calendar-dim: #8c5e5e; /* Цвет дат соседних месяцев */
+        }
+    
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+    
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+            text-align: center;
+            overflow-x: hidden;
+        }
+    
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            font-weight: 400;
+        }
+    
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-color);
+        }
+    
+        .section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 20px;
+        }
+    
+        .hero h1 {
+            font-size: 4rem;
+            margin: 20px 0;
+            font-style: italic;
+            color: white;
+        }
+    
+        .hero .subtitle {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+    
+        .hero .date {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+            padding: 10px 30px;
+        }
+    
+        /* --- Timer --- */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .timer-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .timer-val {
+            font-size: 2rem;
+            font-family: var(--font-title);
+        }
+        .timer-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+    
+        /* --- Intro --- */
+        .intro p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    
+        /* --- КАЛЕНДАРЬ: Стили для компактности и центровки сердечка --- */
+        .calendar-widget {
+            background-color: var(--calendar-bg);
+            color: var(--calendar-text);
+            /* Уменьшаем общий размер */
+            padding: 30px 20px;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 320px; /* Сделали меньше */
+            margin: 30px auto 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            user-select: none;
+        }
+        .calendar-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px 5px; /* Уменьшаем вертикальный зазор */
+            align-items: center;
+            justify-items: center;
+        }
+        .weekday {
+            /* Уменьшаем дни недели */
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px; /* Уменьшаем отступ */
+            font-weight: 300;
+            color: var(--calendar-text);
+        }
+        .day {
+            /* Уменьшаем цифры и ячейку */
+            font-size: 1.3rem;
+            font-weight: 300;
+            position: relative;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+        .day.other-month {
+            color: var(--calendar-dim);
+        }
+        .marked-date {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--calendar-text);
+        }
+        .date-marker {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Сердечко под размер новой ячейки */
+            width: 45px;
+            height: auto;
+            z-index: -1;
+            pointer-events: none;
+        }
+    
+        /* --- Location & Images: Центрация --- */
+        .location img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    
+        /* --- Buttons & Links --- */
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #530c0a;
+        }
+    
+        /* --- Дресс-код: Наслоение кружков с белым контуром --- */
+        .palette {
+            display: flex; /* Используем flexbox для размещения */
+            justify-content: center;
+            align-items: center; /* Центрируем по вертикали */
+            height: 100px; /* Задаем фиксированную высоту для наложения */
+            margin-top: 30px;
+            margin-bottom: 40px;
+            position: relative; /* Родитель для абсолютно позиционированных элементов */
+            width: 100%; /* Занимает всю доступную ширину */
+            max-width: 300px; /* Ограничиваем ширину для лучшего наложения */
+            margin-left: auto;
+            margin-right: auto;
+        }
+    
+        .color-circle {
+            position: absolute; /* Абсолютное позиционирование для наложения */
+            display: block;
+            width: 60px; /* Увеличим размер для наглядности */
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid white; /* Белый контур */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Немного тени */
+            transition: transform 0.3s ease-in-out, z-index 0.3s ease-in-out;
+            cursor: pointer;
+        }
+    
+        .color-circle:nth-child(1) { /* Черный */
+            left: 10%;
+            z-index: 5;
+        }
+        .color-circle:nth-child(2) { /* Темно-бордовый */
+            left: 25%;
+            z-index: 4;
+        }
+        .color-circle:nth-child(3) { /* Темно-фиолетовый */
+            left: 40%;
+            z-index: 3;
+        }
+        .color-circle:nth-child(4) { /* Темно-серый */
+            left: 55%;
+            z-index: 2;
+        }
+        .color-circle:nth-child(5) { /* Шампань */
+            left: 70%;
+            z-index: 1;
+            /* Убираем border: 1px solid #ddd; который был ранее, оставляем только белый */
+        }
+    
+        .color-circle:hover {
+            transform: scale(1.1) translateY(-5px); /* При наведении немного приподнимаем и увеличиваем */
+            z-index: 10; /* Поднимаем наверх при наведении */
+        }
+    
+        .color-description {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            text-align: left;
+            margin-top: 20px;
+        }
+        .color-item {
+            padding: 15px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .color-item p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+        .color-item strong {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+    
+        /* --- Media Query для телефонов (менее 600px) --- */
+        @media (max-width: 600px) {
+            h2 {
+                font-size: 2rem;
+            }
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .section {
+                padding: 50px 15px;
+            }
+            .timer-box {
+                gap: 5px;
+            }
+            .timer-val {
+                font-size: 1.5rem;
+            }
+            /* Убираем стили для таймлайна, так как его заменили */
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+    
+            /* Адаптация палитры для мобильных */
+            .palette {
+                height: 80px; /* Немного меньше высота */
+                max-width: 250px;
+            }
+            .color-circle {
+                width: 50px;
+                height: 50px;
+                border-width: 2px; /* Чуть тоньше контур на мобильных */
+            }
+            .color-circle:nth-child(1) { left: 5%; }
+            .color-circle:nth-child(2) { left: 20%; }
+            .color-circle:nth-child(3) { left: 35%; }
+            .color-circle:nth-child(4) { left: 50%; }
+            .color-circle:nth-child(5) { left: 65%; }
+        }
+    </style>
 </head>
 <body>
 
     <header class="hero">
-        <h1 class="main-title">Wedding Day</h1>
-        <p class="names">Алексей & Алиса</p>
+        <span class="subtitle">Wedding Day</span>
+        <h1>Алексей & Алиса</h1>
+        <div class="date">16 ЯНВАРЯ 2026</div>
         
-        <div class="hero-image-container">
-            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1000&auto=format&fit=crop" alt="Пара" class="hero-photo">
-        </div>
-
-        <div class="hero-text">
-            <p class="date-highlight">16.01.2026</p>
-            <p>Дорогие родные и друзья!</p>
-            <p>Мы будем рады разделить с вами этот особенный день — день рождения нашей семьи.</p>
-            <div class="flower-icon">⚘</div>
-        </div>
+        <div class="timer-container" id="countdown">
+            </div>
     </header>
 
-    <section class="calendar-section">
-        <div class="calendar-card">
-            <h2 class="month-title">ЯНВАРЬ 2026</h2>
+    <section class="section intro fade-in">
+        <h2>Дорогие гости!</h2>
+        <p>Этот момент настал!<br>
+        Совсем скоро состоится день нашей свадьбы, и мы будем счастливы, если Вы разделите с нами этот чудесный день!</p>
+        
+        <div class="calendar-widget">
+            
             <div class="calendar-grid">
-                <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span>
+                <div class="weekday">Пн</div>
+                <div class="weekday">Вт</div>
+                <div class="weekday">Ср</div>
+                <div class="weekday">Чт</div>
+                <div class="weekday">Пт</div>
+                <div class="weekday">Сб</div>
+                <div class="weekday">Вс</div>
+
+                <div class="day other-month">29</div>
+                <div class="day other-month">30</div>
+                <div class="day other-month">31</div>
                 
-                <span class="empty"></span><span class="empty"></span><span class="empty"></span>
-                <span>1</span><span>2</span><span>3</span><span>4</span>
+                <div class="day">1</div>
+                <div class="day">2</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+
+                <div class="day">5</div>
+                <div class="day">6</div>
+                <div class="day">7</div>
+                <div class="day">8</div>
+                <div class="day">9</div>
+                <div class="day">10</div>
+                <div class="day">11</div>
+
+                <div class="day">12</div>
+                <div class="day">13</div>
+                <div class="day">14</div>
+                <div class="day">15</div>
                 
-                <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+                <div class="day marked-date">
+                    16
+                    <img src="https://optim.tildacdn.com/tild6539-3234-4237-a538-623935376466/-/resize/134x/-/format/webp/noroot.png.webp" class="date-marker" alt="heart">
+                </div>
                 
-                <span>12</span><span>13</span><span>14</span><span>15</span>
-                <span class="heart-date">16</span> <span>17</span><span>18</span>
+                <div class="day">17</div>
+                <div class="day">18</div>
+
+                <div class="day">19</div>
+                <div class="day">20</div>
+                <div class="day">21</div>
+                <div class="day">22</div>
+                <div class="day">23</div>
+                <div class="day">24</div>
+                <div class="day">25</div>
+
+                <div class="day">26</div>
+                <div class="day">27</div>
+                <div class="day">28</div>
+                <div class="day">29</div>
+                <div class="day">30</div>
+                <div class="day">31</div>
                 
-                <span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
-                
-                <span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
+                <div class="day other-month">1</div>
             </div>
         </div>
-    </section>
+        </section>
+    
+    <hr>
 
-    <section class="location-section">
-        <h2 class="cursive-title">Локация</h2>
-        <div class="location-card">
-            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1000&auto=format&fit=crop" alt="Место проведения" class="location-photo">
-            <h3>Загородный клуб "Forest"</h3>
-            <p>ул. Лесная, д. 15, г. Минск</p>
-            <a href="#" class="btn-outline">Показать на карте</a>
-        </div>
-    </section>
-
-    <section class="timeline-section">
-        <div class="dark-card">
-            <h2 class="section-title-light">Тайминг <span>дня</span></h2>
-            
-            <div class="timeline-item">
-                <div class="time">15:30</div>
-                <div class="event">
-                    <h3>Сбор гостей</h3>
-                    <p>Приветственный фуршет и фотосессия</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">16:00</div>
-                <div class="event">
-                    <h3>Церемония</h3>
-                    <p>Самый трогательный момент дня</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">17:30</div>
-                <div class="event">
-                    <h3>Банкет</h3>
-                    <p>Вкусная еда, танцы и веселье</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="time">22:00</div>
-                <div class="event">
-                    <h3>Завершение</h3>
-                    <p>Праздничный торт и салют</p>
-                </div>
-            </div>
-            <div class="flower-icon-light">✽</div>
-        </div>
-    </section>
-
-    <section class="dresscode-section">
-        <h2 class="cursive-title">Дресс-код</h2>
-        <p class="dresscode-desc">
-            Будем признательны, если вы поддержите цветовую гамму нашего праздника в своих нарядах.
+    <section class="section location fade-in">
+        <h2>Локация</h2>
+        <p style="margin-bottom: 20px;">
+            <strong>Graf Zeppelin</strong><br>
+            Санкт-Петербург, наб. реки Фонтанки, 142, этаж 6
         </p>
-        
+        <img src="https://avatars.mds.yandex.net/get-altay/15017195/2a00000194bc859e02b1ede5916789cdebed/XXXL" alt="Локация">
+        <br>
+        <a href="https://yandex.ru/maps/?text=Graf+Zeppelin+Санкт-Петербург" target="_blank" class="btn">Посмотреть на карте</a>
+    </section>
+    
+    <hr>
+
+    <section class="section fade-in">
+        <h2>Время начала</h2>
+        <p style="font-size: 1.2rem; margin-top: 10px; font-weight: 500;">
+            Мы ждем всех наших гостей к <span style="color: var(--primary-color); font-size: 1.5rem; font-family: var(--font-title); font-weight: 600;">18:00</span>
+        </p>
+    </section>
+    
+    <hr>
+
+    <section class="section fade-in">
+        <h2>Дресс-код</h2>
+        <p>Мы будем рады, если вы поддержите палитру нашего праздника в своих нарядах.</p>
         <div class="palette">
-            <div class="color-circle" style="background-color: #5d1818;"></div> <div class="color-circle" style="background-color: #e8b49c;"></div> <div class="color-circle" style="background-color: #8f9e81;"></div> <div class="color-circle" style="background-color: #c4a836;"></div> <div class="color-circle" style="background-color: #454545;"></div> </div>
+            <span class="color-circle" style="background-color: #000000;" title="Черный"></span>
+            <span class="color-circle" style="background-color: #530c0a;" title="Темно-бордовый"></span>
+            <span class="color-circle" style="background-color: #381e49;" title="Темно-фиолетовый"></span>
+            <span class="color-circle" style="background-color: #36454F;" title="Темно-серый"></span>
+            <span class="color-circle" style="background-color: #F7EEDD;" title="Шампань"></span>
+        </div>
+    </section>
+    
+    <hr>
+
+    <section class="section fade-in" style="background-color: var(--light-bg);">
+        <h2>Подтверждение присутствия</h2>
+        <p style="margin-bottom: 30px;">
+            Пожалуйста, сообщите нам о своем решении до 1 января. <br>
+            Для этого просто нажмите на удобный мессенджер:
+        </p>
+        <div class="contact-links">
+            <a href="https://wa.me/79956072715" target="_blank" class="btn whatsapp">
+                Напишите нам в WhatsApp
+            </a>
+            <a href="https://t.me/loveavampire" target="_blank" class="btn telegram">
+                Напишите нам в Telegram
+            </a>
+            <p style="font-size: 0.9em; color: #555; margin-top: 15px;">
+                *Если не сможете прийти, просто укажите это в сообщении.
+            </p>
+        </div>
+    </section>
+    
+    <hr>
+
+    <section class="section fade-in">
+        <h2>Контакты</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <p>Алиса +7 (995) 607 27 15</p>
+            </div>
+        </div>
     </section>
 
-    <section class="faq-section">
-        <div class="dark-block-header">
-            <h2>ОТВЕТЫ НА ВОПРОСЫ</h2>
-        </div>
+    <script>
+        // --- Таймер обратного отсчета (Начало: 16 января 2026, 18:00 МСК) ---
+        // Используем явное указание часового пояса (GMT+03:00) для Московского времени
+        const weddingDate = new Date('January 16, 2026 18:00:00 GMT+03:00').getTime(); 
         
-        <div class="accordion">
-            <div class="accordion-item">
-                <button class="accordion-header">Нужно ли дарить цветы?</button>
-                <div class="accordion-content">
-                    <p>Мы будем рады, если вместо цветов вы подарите нам бутылочку вина для нашей домашней коллекции или корм для животных, который мы передадим в приют.</p>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <button class="accordion-header">Возможно ли прийти с детьми?</button>
-                <div class="accordion-content">
-                    <p>Мы очень любим детей, но просим вас оставить их дома, чтобы вы могли полностью расслабиться и отдохнуть.</p>
-                </div>
-            </div>
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
 
-            <div class="accordion-item">
-                <button class="accordion-header">Как добраться до места?</button>
-                <div class="accordion-content">
-                    <p>Для гостей будет организован трансфер от центрального ЗАГСа в 14:30.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    <section class="rsvp-section">
-        <h2 class="cursive-title">Анкета гостя</h2>
-        <p>Пожалуйста, подтвердите свое присутствие до 1 июля</p>
+            // Формируем HTML для таймера
+            document.getElementById("countdown").innerHTML = `
+                <div class="timer-box"><span class="timer-val">${days}</span><span class="timer-label">Дней</span></div>
+                <div class="timer-box"><span class="timer-val">${hours}</span><span class="timer-label">Часов</span></div>
+                <div class="timer-box"><span class="timer-val">${minutes}</span><span class="timer-label">Минут</span></div>
+                <div class="timer-box"><span class="timer-val">${seconds}</span><span class="timer-label">Секунд</span></div>
+            `;
 
-        <form id="weddingForm">
-            <div class="form-group">
-                <input type="text" id="guestName" placeholder="Ваши Имя и Фамилия" required>
-            </div>
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById("countdown").innerHTML = "День Свадьбы!";
+            }
+        }, 1000);
 
-            <div class="form-group radio-group">
-                <p class="label-text">Вы сможете прийти?</p>
-                <label class="radio-container">Я приду / Мы придем
-                    <input type="radio" name="attendance" value="yes" checked>
-                    <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">К сожалению, не смогу
-                    <input type="radio" name="attendance" value="no">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
+        // --- Анимация появления при скролле ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
 
-            <div class="form-group checkbox-group">
-                <p class="label-text">Предпочтения по напиткам:</p>
-                <label class="check-container">Шампанское
-                    <input type="checkbox" name="drink" value="champagne">
-                    <span class="checkmark-box"></span>
-                </label>
-                <label class="check-container">Вино красное/белое
-                    <input type="checkbox" name="drink" value="wine">
-                    <span class="checkmark-box"></span>
-                </label>
-                <label class="check-container">Виски/Коньяк
-                    <input type="checkbox" name="drink" value="whiskey">
-                    <span class="checkmark-box"></span>
-                </label>
-                <label class="check-container">Водка
-                    <input type="checkbox" name="drink" value="vodka">
-                    <span class="checkmark-box"></span>
-                </label>
-                <label class="check-container">Безалкогольные напитки
-                    <input type="checkbox" name="drink" value="na">
-                    <span class="checkmark-box"></span>
-                </label>
-            </div>
+        document.querySelectorAll('.fade-in').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 
-            <button type="submit" class="btn-submit">ОТПРАВИТЬ</button>
-        </form>
-    </section>
-
-    <footer class="footer">
-        <p>Ждем вас на нашей свадьбе!</p>
-        <div class="footer-logo">A & M</div>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
