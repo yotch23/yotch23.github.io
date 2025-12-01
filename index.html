@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алексей & Алиса — Приглашение на свадьбу</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <header class="hero">
+        <span class="subtitle">Wedding Day</span>
+        <h1>Алексей & Алиса</h1>
+        <div class="date">16 ЯНВАРЯ 2026</div>
+        
+        <div class="timer-container" id="countdown">
+            <!-- Заполняется через JavaScript -->
+        </div>
+    </header>
+
+    <section class="section intro fade-in">
+        <h2>Дорогие гости!</h2>
+        <p>Этот момент настал!<br>
+        Совсем скоро состоится день нашей свадьбы, и мы будем счастливы, если Вы разделите с нами этот чудесный день!</p>
+        
+        <div class="calendar-widget">
+            <div class="calendar-grid">
+                <div class="weekday">Пн</div>
+                <div class="weekday">Вт</div>
+                <div class="weekday">Ср</div>
+                <div class="weekday">Чт</div>
+                <div class="weekday">Пт</div>
+                <div class="weekday">Сб</div>
+                <div class="weekday">Вс</div>
+
+                <div class="day other-month">29</div>
+                <div class="day other-month">30</div>
+                <div class="day other-month">31</div>
+                
+                <div class="day">1</div>
+                <div class="day">2</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+
+                <div class="day">5</div>
+                <div class="day">6</div>
+                <div class="day">7</div>
+                <div class="day">8</div>
+                <div class="day">9</div>
+                <div class="day">10</div>
+                <div class="day">11</div>
+
+                <div class="day">12</div>
+                <div class="day">13</div>
+                <div class="day">14</div>
+                <div class="day">15</div>
+                
+                <div class="day marked-date">
+                    16
+                    <img src="https://optim.tildacdn.com/tild6539-3234-4237-a538-623935376466/-/resize/134x/-/format/webp/noroot.png.webp" class="date-marker" alt="heart">
+                </div>
+                
+                <div class="day">17</div>
+                <div class="day">18</div>
+
+                <div class="day">19</div>
+                <div class="day">20</div>
+                <div class="day">21</div>
+                <div class="day">22</div>
+                <div class="day">23</div>
+                <div class="day">24</div>
+                <div class="day">25</div>
+
+                <div class="day">26</div>
+                <div class="day">27</div>
+                <div class="day">28</div>
+                <div class="day">29</div>
+                <div class="day">30</div>
+                <div class="day">31</div>
+                
+                <div class="day other-month">1</div>
+            </div>
+        </div>
+    </section>
+    
+    <hr>
+
+    <section class="section location fade-in">
+        <h2>Локация</h2>
+        <p style="margin-bottom: 20px;">
+            <strong>Graf Zeppelin</strong><br>
+            Санкт-Петербург, наб. реки Фонтанки, 142, этаж 6
+        </p>
+        <img src="https://avatars.mds.yandex.net/get-altay/15017195/2a00000194bc859e02b1ede5916789cdebed/XXXL" alt="Локация">
+        <br>
+        <a href="https://yandex.ru/maps/?text=Graf+Zeppelin+Санкт-Петербург" target="_blank" class="btn">Посмотреть на карте</a>
+    </section>
+    
+    <hr>
+
+    <section class="section fade-in">
+        <h2>Время начала</h2>
+        <p style="font-size: 1.2rem; margin-top: 10px; font-weight: 500;">
+            Мы ждем всех наших гостей к <span style="color: var(--primary-color); font-size: 1.5rem; font-family: var(--font-title); font-weight: 600;">18:00</span>
+        </p>
+    </section>
+    
+    <hr>
+
+    <section class="section fade-in">
+        <h2>Дресс-код</h2>
+        <p>Мы будем рады, если вы поддержите палитру нашего праздника в своих нарядах.</p>
+        <div class="palette">
+            <span class="color-circle" style="background-color: #000000;" title="Черный"></span>
+            <span class="color-circle" style="background-color: #530c0a;" title="Темно-бордовый"></span>
+            <span class="color-circle" style="background-color: #381e49;" title="Темно-фиолетовый"></span>
+            <span class="color-circle" style="background-color: #36454F;" title="Темно-серый"></span>
+            <span class="color-circle" style="background-color: #F7EEDD;" title="Шампань"></span>
+        </div>
+    </section>
+    
+    <hr>
+
+    <section class="section fade-in" style="background-color: var(--light-bg);">
+        <h2>Подтверждение присутствия</h2>
+        <p style="margin-bottom: 30px;">
+            Пожалуйста, сообщите нам о своем решении до 1 января. <br>
+            Для этого просто нажмите на кнопку:
+        </p>
+        <div class="contact-links">
+            <a href="https://t.me/aliceduardovna" target="_blank" class="btn telegram">
+                Напишите нам в Telegram
+            </a>
+            <p style="font-size: 0.9em; color: #555; margin-top: 15px;">
+                *Если не сможете прийти, просто укажите это в сообщении.
+            </p>
+        </div>
+    </section>
+    
+    <hr>
+
+    <section class="section fade-in">
+        <h2>Контакты</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <p>Алиса +7 (995) 607 27 15</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
