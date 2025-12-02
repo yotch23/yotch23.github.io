@@ -1,6 +1,6 @@
 // --- Таймер обратного отсчета (Начало: 16 января 2026, 18:00 МСК) ---
 // Используем явное указание часового пояса (GMT+03:00) для Московского времени
-const weddingDate = new Date('January 16, 2026 18:00:00 GMT+03:00').getTime(); 
+const weddingDate = new Date('January 16, 2026 17:40:00 GMT+03:00').getTime(); 
 
 let timerInterval;
 
